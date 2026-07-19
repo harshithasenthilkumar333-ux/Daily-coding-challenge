@@ -1,0 +1,50 @@
+1.class Solution {
+    int ans = Integer.MIN_VALUE;
+    
+    public int maxPathSum(TreeNode root) {
+        helper(root);
+        return ans;
+    }
+
+    int helper(TreeNode node) {
+        if (node == null) return 0;
+
+        // Get left and right max path sum; ignore negative paths
+        int left = Math.max(helper(node.left), 0);
+        int right = Math.max(helper(node.right), 0);
+
+        // Compute the path sum passing through current node
+        int pathSum = node.val + left + right;
+        
+        // Update global max
+        ans = Math.max(ans, pathSum);
+
+        // Return max gain including current node to parent
+        return node.val + Math.max(left, right);
+    }
+}
+2.class Solution {
+    public boolean isPalindrome(String s) {
+        if (s.isEmpty()) {
+        	return true;
+        }
+        int start = 0;
+        int last = s.length() - 1;
+        while(start <= last) {
+        	char currFirst = s.charAt(start);
+        	char currLast = s.charAt(last);
+        	if (!Character.isLetterOrDigit(currFirst )) {
+        		start++;
+        	} else if(!Character.isLetterOrDigit(currLast)) {
+        		last--;
+        	} else {
+        		if (Character.toLowerCase(currFirst) != Character.toLowerCase(currLast)) {
+        			return false;
+        		}
+        		start++;
+        		last--;
+        	}
+        }
+        return true;
+    }
+}
