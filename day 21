@@ -1,0 +1,19 @@
+1.// Added using AI
+class Solution {
+    public int bitwiseComplement(int n) {
+        if (n == 0) return 1;
+        int mask = (1 << (32 - Integer.numberOfLeadingZeros(n))) - 1;
+        return n ^ mask;
+    }
+}
+2.class Solution {
+    public int mirrorDistance(int n) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(n);
+        sb.reverse();
+        int number = Integer.parseInt(sb.toString());
+        return Math.abs(number-n);
+    }
+
+
+}
