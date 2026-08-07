@@ -1,0 +1,48 @@
+1.import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+        List<String> result = new ArrayList<>();
+        if (nums.length == 0) {
+            return result;
+        }
+        
+        int i = 0;
+        while (i < nums.length) {
+            int start = nums[i];
+            int j = i;
+            // Expand the range as long as elements are consecutive
+            while (j + 1 < nums.length && nums[j + 1] == nums[j] + 1) {
+                j++;
+            }
+            
+            // Format the range string
+            if (nums[j] == start) {
+                result.add(String.valueOf(start));
+            } else {
+                result.add(start + "->" + nums[j]);
+            }
+            
+            // Move to the next potential start of a range
+            i = j + 1;
+        }
+        return result;
+    }
+}
+2.class Solution {
+    public int tribonacci(int n) {
+        if(n == 0)
+            return 0;
+        if(n == 1 || n == 2)
+            return 1;
+        int[] Tribonacci = new int[n+1];
+        Tribonacci[0] = 0;
+        Tribonacci[1] = 1;
+        Tribonacci[2] = 1;
+        for(int i = 3; i < n+1; i++){
+            Tribonacci[i] = Tribonacci[i-1] + Tribonacci[i-2] + Tribonacci[i-3];
+        }
+        return Tribonacci[n];
+    }
+}
