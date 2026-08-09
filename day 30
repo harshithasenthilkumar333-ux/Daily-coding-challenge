@@ -1,0 +1,33 @@
+1.class Solution {
+    public int numberOfSteps(int num) {
+        return count(num, 0);
+    }
+    private int count(int num, int steps) {
+        if (num == 0) {
+            return steps;
+        }
+        if (num % 2 == 0) {
+            return count(num / 2, steps + 1);
+        }
+        return count(num - 1, steps + 1);
+    }
+}
+2.class Solution {
+    public int subtractProductAndSum(int n) {
+
+        int product = 1;
+        int sum = 0;
+
+        while (n > 0) {
+
+            int digit = n % 10;
+
+            sum += digit;
+            product *= digit;
+
+            n /= 10;
+        }
+
+        return product - sum;
+    }
+}
