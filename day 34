@@ -1,0 +1,54 @@
+1.class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) return new int[0][0];
+
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+        List<int[]> merged = new ArrayList<>();
+        merged.add(intervals[0]);
+
+        for (int i = 1; i < intervals.length; i++) {
+            int[] last = merged.get(merged.size() - 1);
+            int[] current = intervals[i];
+
+            if (current[0] <= last[1]) {
+                last[1] = Math.max(last[1], current[1]);
+            } else {
+                merged.add(current);
+            }
+        }
+
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
+2.class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int top = 0, bottom = matrix.length - 1;
+        int left = 0, right = matrix[0].length - 1;
+        List<Integer> spiral = new ArrayList<>();
+
+        while (top <= bottom && left <= right) {
+            for (int i = left; i <= right; i++)
+                spiral.add(matrix[top][i]);
+            top++;
+
+            for (int j = top; j <= bottom; j++)
+                spiral.add(matrix[j][right]);
+            right--;
+
+            if (top <= bottom) {
+                for (int k = right; k >= left; k--)
+                    spiral.add(matrix[bottom][k]);
+                bottom--;
+            }
+
+            if (left <= right) {
+                for (int l = bottom; l >= top; l--)
+                    spiral.add(matrix[l][left]);
+                left++;
+            }
+        }
+
+        return spiral;
+    }
+}
