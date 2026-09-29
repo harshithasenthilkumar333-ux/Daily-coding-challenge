@@ -1,0 +1,40 @@
+1.class Solution {
+    public int calPoints(String[] operations) {
+        List<Integer> lst = new ArrayList<>();
+
+        for (String str : operations) {
+            if (str.equals("C")) {
+                lst.remove(lst.size() - 1);
+            } else if (str.equals("D")) {
+                lst.add(lst.get(lst.size() - 1) * 2);
+            } else if (str.equals("+")) {
+                lst.add(lst.get(lst.size() - 1) + lst.get(lst.size() - 2));
+            } else {
+                lst.add(Integer.valueOf(str));
+            }
+        }
+
+        return lst.stream().mapToInt(i -> i).sum();
+
+    }
+}
+2.class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] nextGreater = new int[10001];
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= nums2[i]) {
+                stack.pop();
+            }
+            nextGreater[nums2[i]] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(nums2[i]);
+        }
+
+        for (int i = 0; i < nums1.length; i++) {
+            nums1[i] = nextGreater[nums1[i]];
+        }
+
+        return nums1;
+    }
+}
