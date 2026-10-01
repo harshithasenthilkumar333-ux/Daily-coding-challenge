@@ -1,0 +1,10 @@
+1.SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
+2.SELECT name as Customers
+from Customers
+where id not in (
+    select customerId
+    from Orders
+);
